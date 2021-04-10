@@ -24,25 +24,25 @@ class _TasksState extends State<Tasks> {
     tasks = await database.rawQuery('SELECT * FROM Tasks');
   }
 
-  void addTask(String taskDescription) async {
-    await database.transaction((txn) async {
-      await txn
-          .rawInsert("INSERT INTO Tasks(description) VALUES($taskDescription)");
-    });
-  }
-
   @override
   void initState() {
     super.initState();
     setUp();
+    print(tasks);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomForm(),
-      ],
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Text('+'),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (_) => AlertDialog(content: Text("Hello")),
+          );
+        },
+      ),
     );
   }
 }
