@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import './tasks.dart';
 import './about.dart';
 import './timer.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -42,10 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       style: optionStyle,
     ),
     Timer(),
-    Text(
-      'Tasks',
-      style: optionStyle,
-    ),
+    Tasks(),
     Text(
       'Calendar',
       style: optionStyle,
@@ -57,6 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _selectedIndex = index;
     });
+
+
+    
   }
 
   @override
