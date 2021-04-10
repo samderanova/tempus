@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import './tasks.dart';
+import './home.dart';
+import './about.dart';
 import './timer.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -36,23 +41,14 @@ class _MyHomePageState extends State<MyHomePage> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Home',
-      style: optionStyle,
-    ),
+    Home(),
     Countdown(),
-    Text(
-      'Tasks',
-      style: optionStyle,
-    ),
+    Tasks(),
     Text(
       'Calendar',
       style: optionStyle,
     ),
-    Text(
-      'About',
-      style: optionStyle,
-    ),
+    About(),
   ];
 
   void _onItemTapped(int index) {
