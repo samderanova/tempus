@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import './form.dart';
 
 class Tasks extends StatefulWidget {
   Tasks();
@@ -10,15 +11,24 @@ class Tasks extends StatefulWidget {
 
 class _TasksState extends State<Tasks> {
   List<Map> tasks;
+  String path;
+  Database database;
 
   void setUp() async {
-    String path = join(await getDatabasesPath(), 'tasks.db');
-    Database database = await openDatabase(path, version: 1,
+    path = join(await getDatabasesPath(), 'tasks.db');
+    database = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       await db.execute(
           'CREATE TABLE Tasks (id INTEGER PRIMARY KEY, description TEXT)');
     });
     tasks = await database.rawQuery('SELECT * FROM Tasks');
+  }
+
+  void addTask(String taskDescription) async {
+    await database.transaction((txn) async {
+      await txn
+          .rawInsert("INSERT INTO Tasks(description) VALUES($taskDescription)");
+    });
   }
 
   @override
@@ -30,7 +40,9 @@ class _TasksState extends State<Tasks> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [],
+      children: [
+        CustomForm(),
+      ],
     );
   }
 }
