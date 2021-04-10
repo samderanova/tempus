@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+import './about.dart';
+import './timer.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,12 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static List<Widget> _widgetOptions = <Widget>[
+  List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Text(
-      'Timer',
-      style: optionStyle,
-    ),
+    Timer(),
     Text(
       'Tasks',
       style: optionStyle,
@@ -49,10 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       'Calendar',
       style: optionStyle,
     ),
-    Text(
-      'About',
-      style: optionStyle,
-    ),
+    About(),
   ];
 
   void _onItemTapped(int index) {
