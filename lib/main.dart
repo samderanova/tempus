@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
       'Home',
       style: optionStyle,
     ),
-    Timer(),
+    Countdown(),
     Text(
       'Tasks',
       style: optionStyle,
