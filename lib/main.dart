@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './about.dart';
+import './timer.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,10 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
       'Home',
       style: optionStyle,
     ),
-    Text(
-      'Timer',
-      style: optionStyle,
-    ),
+    Timer(),
     Text(
       'Tasks',
       style: optionStyle,
