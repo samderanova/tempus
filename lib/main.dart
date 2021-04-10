@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  final int pageNum;
+  MyHomePage({this.pageNum = 0});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -37,7 +38,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const Color navTextColor = Colors.white;
   static const Color navBackgroundColor = Color(0xffe0c2c0);
-  int _selectedIndex = 0;
+  int _selectedIndex;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   List<Widget> _widgetOptions = <Widget>[
@@ -55,6 +56,13 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.pageNum;
+    print(_selectedIndex);
   }
 
   @override
