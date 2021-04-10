@@ -4,6 +4,7 @@ import './tasks.dart';
 import './home.dart';
 import './about.dart';
 import './timer.dart';
+import './calendar.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,10 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Home(),
     Timer(),
     Tasks(),
-    Text(
-      'Calendar',
-      style: optionStyle,
-    ),
+    Calendar(),
     About(),
   ];
 
