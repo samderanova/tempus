@@ -12,8 +12,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        backgroundColor: Colors.pink,
       ),
-      home: MyHomePage(),
+      home: SafeArea(
+        child: MyHomePage(),
+      ),
     );
   }
 }
@@ -26,6 +29,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  static const Color navTextColor = Colors.white;
+  static const Color navBackgroundColor = Color(0xffe0c2c0);
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -62,41 +67,43 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+        backgroundColor: navBackgroundColor,
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
+      backgroundColor: Color(0xffdbb0a0),
       bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: navBackgroundColor,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
-              backgroundColor: Colors.pink,
+              backgroundColor: navTextColor,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.timer),
               label: 'Timer',
-              backgroundColor: Colors.pink,
+              backgroundColor: navTextColor,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.list),
               label: 'Tasks',
-              backgroundColor: Colors.pink,
+              backgroundColor: navTextColor,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.calendar_today),
               label: 'Calendar',
-              backgroundColor: Colors.pink,
+              backgroundColor: navTextColor,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.info),
               label: 'About',
-              backgroundColor: Colors.pink,
+              backgroundColor: navTextColor,
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.pink.shade100,
+          selectedItemColor: navTextColor,
           onTap: _onItemTapped,
           type: BottomNavigationBarType.fixed),
     );
