@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Timer(),
+    Countdown(),
     Tasks(),
     Calendar(),
     About(),
