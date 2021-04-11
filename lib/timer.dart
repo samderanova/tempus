@@ -42,15 +42,15 @@ class _CountdownState extends State<Countdown> {
               ),
             ),
           ),
-          new RaisedButton(
+          new ElevatedButton(
             onPressed: () => increaseTime(),
             child: Text('Increase timer by 1 minute'),
           ),
-          new RaisedButton(
+          new ElevatedButton(
             onPressed: () => startCountdown(),
             child: Text('Start timer!'),
           ),
-          new RaisedButton(
+          new ElevatedButton(
             onPressed: () => stopCountdown(),
             child: Text('Stop timer'),
           )
