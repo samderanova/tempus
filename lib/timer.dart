@@ -51,6 +51,7 @@ class _CountdownState extends State<Countdown> {
                   ),
                 ),
               ),
+<<<<<<< HEAD
               new SizedBox(height: 10),
               new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -157,6 +158,23 @@ class _CountdownState extends State<Countdown> {
                 ],
               ),
             ]),
+=======
+            ),
+          ),
+          new ElevatedButton(
+            onPressed: () => increaseTime(),
+            child: Text('Increase timer by 1 minute'),
+          ),
+          new ElevatedButton(
+            onPressed: () => startCountdown(),
+            child: Text('Start timer!'),
+          ),
+          new ElevatedButton(
+            onPressed: () => stopCountdown(),
+            child: Text('Stop timer'),
+          )
+        ],
+>>>>>>> 4d70a6e2f58a01831376a6ea2bbadfd43c2b7379
       ),
     ]);
   }

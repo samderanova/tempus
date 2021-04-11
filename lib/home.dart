@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
                     fontSize: 30,
                   ),
                 ),
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                   color: Color(0xffffcccb),
                   shape: BoxShape.circle,
                 ),
@@ -42,29 +42,26 @@ class _HomeState extends State<Home> {
                   future: futureQuote,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return Column(
-                        children: [
-                          Container(
-                              child: Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(20),
-                                child: Text(
-                                  snapshot.data.text,
-                                  style: TextStyle(
-                                    fontStyle: FontStyle.italic,
-                                    fontSize: 20,
-                                  ),
-                                  textAlign: TextAlign.center,
+                      return Container(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Text(
+                                snapshot.data.text,
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 20,
                                 ),
+                                textAlign: TextAlign.center,
                               ),
-                              Text('~${snapshot.data.author}',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ))
-                            ],
-                          )),
-                        ],
+                            ),
+                            Text('~${snapshot.data.author}',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ))
+                          ],
+                        ),
                       );
                     } else if (snapshot.hasError) {
                       return Padding(
@@ -95,6 +92,30 @@ class _HomeState extends State<Home> {
               ),
               textAlign: TextAlign.center,
             ),
+          ),
+        ),
+        Positioned(
+          left: -100,
+          bottom: -150,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xffffcccb),
+              shape: BoxShape.circle,
+            ),
+            height: MediaQuery.of(context).size.height / 2.5,
+            width: MediaQuery.of(context).size.width / 2.5,
+          ),
+        ),
+        Positioned(
+          right: -100,
+          bottom: -150,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xffffcccb),
+              shape: BoxShape.circle,
+            ),
+            height: MediaQuery.of(context).size.height / 2.5,
+            width: MediaQuery.of(context).size.width / 2.5,
           ),
         ),
       ],

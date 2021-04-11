@@ -3,22 +3,29 @@ import 'package:flutter/material.dart';
 class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Container(
-          child: Text(
-            "About",
-            style: TextStyle(
-              fontSize: 30,
-            ),
-          ),
-          decoration: new BoxDecoration(
-            color: Color(0xffffcccb),
-            shape: BoxShape.circle,
-          ),
-          height: MediaQuery.of(context).size.height / 2.5,
-          width: MediaQuery.of(context).size.width / 2.5,
+        Align(
           alignment: Alignment.center,
+          child: Column(
+            children: [
+              Container(
+                child: Text(
+                  "About",
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
+                decoration: BoxDecoration(
+                  color: Color(0xffffcccb),
+                  shape: BoxShape.circle,
+                ),
+                height: MediaQuery.of(context).size.height / 2.5,
+                width: MediaQuery.of(context).size.width / 2.5,
+                alignment: Alignment.center,
+              )
+            ],
+          ),
         ),
         Container(
           alignment: Alignment.center,
@@ -28,11 +35,34 @@ class About extends StatelessWidget {
               style: TextStyle(fontSize: 20, height: 1.5),
               textAlign: TextAlign.center,
             ),
-            padding: EdgeInsets.all(30),
+            padding: EdgeInsets.fromLTRB(20, 200, 20, 20),
           ),
-        )
+        ),
+        Positioned(
+          left: -100,
+          bottom: -150,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xffffcccb),
+              shape: BoxShape.circle,
+            ),
+            height: MediaQuery.of(context).size.height / 2.5,
+            width: MediaQuery.of(context).size.width / 2.5,
+          ),
+        ),
+        Positioned(
+          right: -100,
+          bottom: -150,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xffffcccb),
+              shape: BoxShape.circle,
+            ),
+            height: MediaQuery.of(context).size.height / 2.5,
+            width: MediaQuery.of(context).size.width / 2.5,
+          ),
+        ),
       ],
-      mainAxisSize: MainAxisSize.max,
     );
   }
 }

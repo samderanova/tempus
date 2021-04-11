@@ -4,6 +4,7 @@ import './tasks.dart';
 import './home.dart';
 import './about.dart';
 import './timer.dart';
+import './calendar.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  final int pageNum;
+  MyHomePage({this.pageNum = 0});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -37,17 +39,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const Color navTextColor = Colors.white;
   static const Color navBackgroundColor = Color(0xffe0c2c0);
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  int _selectedIndex;
+  // static const TextStyle optionStyle =
+  //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   List<Widget> _widgetOptions = <Widget>[
     Home(),
     Countdown(),
     Tasks(),
-    Text(
-      'Calendar',
-      style: optionStyle,
-    ),
+    Calendar(),
     About(),
   ];
 
@@ -55,6 +54,13 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.pageNum;
+    print(_selectedIndex);
   }
 
   @override
