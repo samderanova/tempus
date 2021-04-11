@@ -28,8 +28,7 @@ class _TasksState extends State<Tasks> {
     return refreshData();
   }
 
-  void deleteTask() async {
-  }
+  void deleteTask() async {}
 
   Future<List<Widget>> refreshData() async {
     List<Widget> resultList = [];
