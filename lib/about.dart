@@ -31,7 +31,7 @@ class About extends StatelessWidget {
           alignment: Alignment.center,
           child: Padding(
             child: Text(
-              "Tempus is a motivational app that increases your focus and productivity to the max! You can create your own tasks and set timers for each one. When starting each task, the app can even lock your phone so you don't get distracted by it!",
+              "Tempus is a motivational app that increases your focus and productivity to the max! You can create your own tasks and set timers for each one. Lastly, check the calendar out to see which tasks you have planned!",
               style: TextStyle(fontSize: 20, height: 1.5),
               textAlign: TextAlign.center,
             ),
