@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 import './tasks.dart';
 import './home.dart';
 import './about.dart';
@@ -40,15 +42,29 @@ class _MyHomePageState extends State<MyHomePage> {
   static const Color navTextColor = Colors.white;
   static const Color navBackgroundColor = Color(0xffe0c2c0);
   int _selectedIndex;
-  // static const TextStyle optionStyle =
-  //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    Countdown(),
-    Tasks(),
-    Calendar(),
-    About(),
-  ];
+  List<Widget> _widgetOptions;
+  String path;
+  Database database;
+  _MyHomePageState() {
+    _widgetOptions = <Widget>[
+      Home(),
+      Countdown(),
+      Tasks(),
+      Calendar(setUp()),
+      About(),
+    ];
+    setUp();
+  }
+
+  Future<List> setUp() async {
+    path = join(await getDatabasesPath(), 'tasks.db');
+    database = await openDatabase(path, version: 1,
+        onCreate: (Database db, int version) async {
+      await db.execute(
+          'CREATE TABLE Tasks (id INTEGER PRIMARY KEY, description TEXT, startdate TEXT, enddate TEXT)');
+    });
+    return [path, database];
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -60,7 +76,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _selectedIndex = widget.pageNum;
-    print(_selectedIndex);
   }
 
   @override

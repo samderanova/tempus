@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calendar extends StatefulWidget {
+  final Future<List> dbLocation;
+  Calendar(this.dbLocation);
   @override
   _CalendarState createState() => _CalendarState();
 }
@@ -10,6 +12,12 @@ class _CalendarState extends State<Calendar> {
   DateTime _selectedDay;
   DateTime _focusedDay = DateTime.now();
   CalendarFormat _calendarFormat = CalendarFormat.week;
+
+  @override
+  void initState() {
+    print(widget.dbLocation);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

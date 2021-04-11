@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:flutter_picker/flutter_picker.dart';
 
 class Countdown extends StatefulWidget {
   @override
@@ -11,7 +10,6 @@ class Countdown extends StatefulWidget {
 class _CountdownState extends State<Countdown> {
   bool _timerRunning = false;
   Duration _timer = new Duration(hours: 0, minutes: 0, seconds: 0);
-  TextStyle _txtStyle = TextStyle(color: Colors.white);
   TextStyle _mainTxtStyle = TextStyle(color: Colors.white, fontSize: 30);
   Timer runCode;
   ButtonStyle btnStyle = new ButtonStyle(
@@ -51,7 +49,6 @@ class _CountdownState extends State<Countdown> {
                   ),
                 ),
               ),
-<<<<<<< HEAD
               new SizedBox(height: 10),
               new Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -158,23 +155,6 @@ class _CountdownState extends State<Countdown> {
                 ],
               ),
             ]),
-=======
-            ),
-          ),
-          new ElevatedButton(
-            onPressed: () => increaseTime(),
-            child: Text('Increase timer by 1 minute'),
-          ),
-          new ElevatedButton(
-            onPressed: () => startCountdown(),
-            child: Text('Start timer!'),
-          ),
-          new ElevatedButton(
-            onPressed: () => stopCountdown(),
-            child: Text('Stop timer'),
-          )
-        ],
->>>>>>> 4d70a6e2f58a01831376a6ea2bbadfd43c2b7379
       ),
     ]);
   }

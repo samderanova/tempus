@@ -34,9 +34,9 @@ class CustomFormState extends State<CustomForm> {
   void addTask(String taskDescription, String deadline) async {
     String deadlineStr = deadline;
     await widget.database.transaction((txn) async {
-      String today = DateTime.now().toString();
+      String today = DateFormat.yMMMd().format(DateTime.now());
       await txn.rawInsert(
-          "INSERT INTO Tasks(description) VALUES('$taskDescription', '$today', '$deadlineStr')");
+          "INSERT INTO Tasks(description, startdate, enddate) VALUES('$taskDescription', '$today', '$deadlineStr')");
     });
   }
 

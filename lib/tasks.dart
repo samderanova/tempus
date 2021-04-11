@@ -21,6 +21,7 @@ class _TasksState extends State<Tasks> {
       await db.execute(
           'CREATE TABLE Tasks (id INTEGER PRIMARY KEY, description TEXT, startdate TEXT, enddate TEXT)');
     });
+    // await deleteDatabase(path);
     return refreshData();
   }
 
