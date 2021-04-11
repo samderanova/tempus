@@ -28,13 +28,13 @@ class CustomFormState extends State<CustomForm> {
   @override
   void initState() {
     super.initState();
-    dateController.text = DateFormat.yMMMd().format(DateTime.now());
+    dateController.text = DateFormat('yyyy-MM-dd').format(DateTime.now());
   }
 
   void addTask(String taskDescription, String deadline) async {
     String deadlineStr = deadline;
     await widget.database.transaction((txn) async {
-      String today = DateFormat.yMMMd().format(DateTime.now());
+      String today = DateFormat('yyyy-MM-dd').format(DateTime.now());
       await txn.rawInsert(
           "INSERT INTO Tasks(description, startdate, enddate) VALUES('$taskDescription', '$today', '$deadlineStr')");
     });

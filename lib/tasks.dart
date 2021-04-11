@@ -14,13 +14,16 @@ class _TasksState extends State<Tasks> {
   String path;
   Database database;
 
-  Future<List<Widget>> setUp() async {
+  Future<List<Widget>> tasksSetUp() async {
     path = join(await getDatabasesPath(), 'tasks.db');
-    database = await openDatabase(path, version: 1,
-        onCreate: (Database db, int version) async {
-      await db.execute(
-          'CREATE TABLE Tasks (id INTEGER PRIMARY KEY, description TEXT, startdate TEXT, enddate TEXT)');
-    });
+    database = await openDatabase(
+      path,
+      version: 1,
+      onCreate: (Database db, int version) async {
+        await db.execute(
+            'CREATE TABLE Tasks (id INTEGER PRIMARY KEY, description TEXT, startdate TEXT, enddate TEXT)');
+      },
+    );
     // await deleteDatabase(path);
     return refreshData();
   }
@@ -30,7 +33,46 @@ class _TasksState extends State<Tasks> {
     List<Map> queryResults = await database.rawQuery('SELECT * FROM Tasks');
     if (queryResults.isNotEmpty) {
       for (int i = 0; i < queryResults.length; i++) {
-        resultList.add(Text(queryResults[i]["description"].toString()));
+        String taskDescription = queryResults[i]["description"];
+        String dateStarted = queryResults[i]["startdate"];
+        String deadline = queryResults[i]["enddate"];
+        resultList.add(
+          Padding(
+            padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: Container(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text("${i + 1}"),
+                      Spacer(flex: 1),
+                      Column(
+                        children: [
+                          Text("$dateStarted to $deadline"),
+                        ],
+                      ),
+                      Spacer(flex: 1),
+                      TextButton(
+                        onPressed: () {},
+                        child: Icon(Icons.delete),
+                      )
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                  ),
+                  Container(
+                    child: Text(taskDescription),
+                  )
+                ],
+              ),
+              decoration: BoxDecoration(
+                  color: Colors.white70,
+                  border: Border.all(width: 1),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
+            ),
+          ),
+        );
       }
     }
     return resultList;
@@ -42,7 +84,7 @@ class _TasksState extends State<Tasks> {
 
   @override
   void initState() {
-    setUp();
+    tasksSetUp();
     super.initState();
   }
 
@@ -58,24 +100,48 @@ class _TasksState extends State<Tasks> {
                 if (snapshot.hasData) {
                   children = snapshot.data;
                 } else if (snapshot.hasError) {
-                  children = [Text("Failed to fetch your tasks!")];
+                  print(snapshot.error);
+                  children = [
+                    Padding(
+                      padding: EdgeInsets.all(25),
+                      child: Text(
+                        "Failed to fetch your tasks!",
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ),
+                  ];
                 } else {
-                  children = [Text("No tasks found yet!")];
+                  children = [
+                    Padding(
+                      padding: EdgeInsets.all(25),
+                      child: Text(
+                        "No tasks found yet!",
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ),
+                  ];
                 }
                 return Column(
-                  children: children,
+                  children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(25),
+                          child: Text(
+                            "Your Tasks",
+                            style: TextStyle(fontSize: 30),
+                          ),
+                        ),
+                      ] +
+                      children,
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                 );
               },
-              future: setUp())
+              future: tasksSetUp())
         ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Text('+', style: TextStyle(fontSize: 25)),
-        backgroundColor: Colors.pink,
-        focusColor: Colors.pink[100],
-        splashColor: Colors.pink[50],
+        backgroundColor: Colors.pink[300],
         onPressed: () {
           showDialog(
             context: context,
