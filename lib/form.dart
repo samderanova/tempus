@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:intl/intl.dart';
 
 class CustomForm extends StatefulWidget {
   CustomForm(this.path, this.database);
@@ -24,8 +25,14 @@ class CustomFormState extends State<CustomForm> {
     super.dispose();
   }
 
-  void addTask(String taskDescription, DateTime deadline) async {
-    String deadlineStr = deadline.toString();
+  @override
+  void initState() {
+    super.initState();
+    dateController.text = DateFormat.yMMMd().format(DateTime.now());
+  }
+
+  void addTask(String taskDescription, String deadline) async {
+    String deadlineStr = deadline;
     await widget.database.transaction((txn) async {
       String today = DateTime.now().toString();
       await txn.rawInsert(
@@ -72,6 +79,7 @@ class CustomFormState extends State<CustomForm> {
               },
             ),
             TextFormField(
+              key: Key(dateController.text),
               controller: dateController,
               decoration: const InputDecoration(
                 icon: Icon(Icons.calendar_today),
@@ -80,10 +88,15 @@ class CustomFormState extends State<CustomForm> {
               onTap: () {
                 FocusScope.of(context).requestFocus(new FocusNode());
                 showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime(2050));
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime(2050),
+                  errorFormatText: "Date is incorrectly formatted!",
+                  errorInvalidText: "Invalid date!",
+                ).then((value) => setState(() {
+                      dateController.text = DateFormat.yMMMd().format(value);
+                    }));
               },
             ),
             Padding(
@@ -97,7 +110,7 @@ class CustomFormState extends State<CustomForm> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState.validate()) {
-                    // addTask(taskController.text);
+                    addTask(taskController.text, dateController.text);
                     ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: Text('Added task!')));
                   }
