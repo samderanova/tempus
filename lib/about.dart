@@ -31,11 +31,11 @@ class About extends StatelessWidget {
           alignment: Alignment.center,
           child: Padding(
             child: Text(
-              "\n\n\n\nTempus is a motivational app that increases your focus and productivity to the max! You can create your own tasks and set timers for each one. When starting each task, the app can even lock your phone so you don't get distracted by it!",
+              "Tempus is a motivational app that increases your focus and productivity to the max! You can create your own tasks and set timers for each one. When starting each task, the app can even lock your phone so you don't get distracted by it!",
               style: TextStyle(fontSize: 20, height: 1.5),
               textAlign: TextAlign.center,
             ),
-            padding: EdgeInsets.fromLTRB(20, 100, 20, 20),
+            padding: EdgeInsets.fromLTRB(20, 200, 20, 20),
           ),
         ),
         Positioned(
