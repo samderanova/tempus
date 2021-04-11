@@ -19,7 +19,7 @@ class _TasksState extends State<Tasks> {
     database = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       await db.execute(
-          'CREATE TABLE Tasks (id INTEGER PRIMARY KEY, description TEXT)');
+          'CREATE TABLE Tasks (id INTEGER PRIMARY KEY, description TEXT, startdate TEXT, enddate TEXT)');
     });
     return refreshData();
   }
