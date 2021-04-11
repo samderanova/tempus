@@ -29,8 +29,6 @@ class _TasksState extends State<Tasks> {
   }
 
   void deleteTask(int rowID) async {
-    print(rowID);
-    print(await database.rawQuery('SELECT * FROM Tasks'));
     await database.rawDelete('DELETE FROM Tasks WHERE id = $rowID');
     setState(() {});
   }
@@ -100,53 +98,78 @@ class _TasksState extends State<Tasks> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          FutureBuilder(
-              builder:
-                  (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
-                List<Widget> children;
-                if (snapshot.hasData) {
-                  children = snapshot.data;
-                } else if (snapshot.hasError) {
-                  print(snapshot.error);
-                  children = [
-                    Padding(
-                      padding: EdgeInsets.all(25),
-                      child: Text(
-                        "Failed to fetch your tasks!",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                  ];
-                } else {
-                  children = [
-                    Padding(
-                      padding: EdgeInsets.all(25),
-                      child: Text(
-                        "No tasks found yet!",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                  ];
-                }
-                return Column(
-                  children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(25),
-                          child: Text(
-                            "Your Tasks",
-                            style: TextStyle(fontSize: 30),
-                          ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xffdbb0a0),
+              Color(0xffffbdca),
+              Color(0xffff8695),
+            ],
+          ),
+        ),
+        child: ListView(
+          children: [
+            FutureBuilder(
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<Widget>> snapshot) {
+                  List<Widget> children;
+                  if (snapshot.hasData && snapshot.data.isNotEmpty) {
+                    children = snapshot.data;
+                  } else if (snapshot.hasError) {
+                    print(snapshot.error);
+                    children = [
+                      Padding(
+                        padding: EdgeInsets.all(25),
+                        child: Text(
+                          "Failed to fetch your tasks!",
+                          style: TextStyle(fontSize: 30),
                         ),
-                      ] +
-                      children,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                );
-              },
-              future: tasksSetUp())
-        ],
+                      ),
+                    ];
+                  } else {
+                    children = [
+                      Padding(
+                        padding: EdgeInsets.all(25),
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.check_circle,
+                              color: Colors.pink[50],
+                              size: 100,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Text(
+                                "No tasks found yet!",
+                                style: TextStyle(fontSize: 30),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ];
+                  }
+                  return Column(
+                    children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.all(25),
+                            child: Text(
+                              "Your Tasks",
+                              style: TextStyle(fontSize: 30),
+                            ),
+                          ),
+                        ] +
+                        children,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                  );
+                },
+                future: tasksSetUp())
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Text('+', style: TextStyle(fontSize: 25)),
@@ -165,7 +188,6 @@ class _TasksState extends State<Tasks> {
           });
         },
       ),
-      backgroundColor: Color(0xffdbb0a0),
     );
   }
 }

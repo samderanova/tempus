@@ -84,10 +84,22 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: navBackgroundColor,
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xffdbb0a0),
+              Color(0xffffbdca),
+              Color(0xffff8695),
+            ],
+          ),
+        ),
+        child: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
       ),
-      backgroundColor: Color(0xffdbb0a0),
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: navBackgroundColor,
           items: const <BottomNavigationBarItem>[
