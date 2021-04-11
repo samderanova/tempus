@@ -40,8 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
   static const Color navTextColor = Colors.white;
   static const Color navBackgroundColor = Color(0xffe0c2c0);
   int _selectedIndex;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  // static const TextStyle optionStyle =
+  //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   List<Widget> _widgetOptions = <Widget>[
     Home(),
     Countdown(),

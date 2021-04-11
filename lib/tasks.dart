@@ -78,7 +78,10 @@ class _TasksState extends State<Tasks> {
         onPressed: () {
           showDialog(
             context: context,
-            builder: (_) => AlertDialog(content: CustomForm(path, database)),
+            builder: (_) => AlertDialog(
+              backgroundColor: Color(0xffffcccb),
+              content: CustomForm(path, database),
+            ),
             useSafeArea: true,
           ).then((value) {
             refreshTasks();
@@ -86,6 +89,7 @@ class _TasksState extends State<Tasks> {
           });
         },
       ),
+      backgroundColor: Color(0xffdbb0a0),
     );
   }
 }
