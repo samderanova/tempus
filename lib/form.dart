@@ -95,7 +95,8 @@ class CustomFormState extends State<CustomForm> {
                   errorFormatText: "Date is incorrectly formatted!",
                   errorInvalidText: "Invalid date!",
                 ).then((value) => setState(() {
-                      dateController.text = DateFormat.yMMMd().format(value);
+                      dateController.text =
+                          DateFormat('yyy-MM-dd').format(value);
                     }));
               },
             ),

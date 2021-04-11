@@ -28,6 +28,9 @@ class _TasksState extends State<Tasks> {
     return refreshData();
   }
 
+  void deleteTask() async {
+  }
+
   Future<List<Widget>> refreshData() async {
     List<Widget> resultList = [];
     List<Map> queryResults = await database.rawQuery('SELECT * FROM Tasks');
@@ -53,7 +56,9 @@ class _TasksState extends State<Tasks> {
                       ),
                       Spacer(flex: 1),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          deleteTask();
+                        },
                         child: Icon(Icons.delete),
                       )
                     ],
