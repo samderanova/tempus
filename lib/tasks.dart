@@ -28,7 +28,11 @@ class _TasksState extends State<Tasks> {
     return refreshData();
   }
 
-  void deleteTask() async {
+  void deleteTask(int rowID) async {
+    print(rowID);
+    print(await database.rawQuery('SELECT * FROM Tasks'));
+    await database.rawDelete('DELETE FROM Tasks WHERE id = $rowID');
+    setState(() {});
   }
 
   Future<List<Widget>> refreshData() async {
@@ -57,7 +61,7 @@ class _TasksState extends State<Tasks> {
                       Spacer(flex: 1),
                       TextButton(
                         onPressed: () {
-                          deleteTask();
+                          deleteTask(queryResults[i]["id"]);
                         },
                         child: Icon(Icons.delete),
                       )
